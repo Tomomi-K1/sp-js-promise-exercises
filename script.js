@@ -38,3 +38,5 @@ Promise.all(favoriteNumberFacts)
             showText(text);
         }
     })
+
+

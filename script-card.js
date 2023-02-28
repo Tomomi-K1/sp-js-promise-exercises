@@ -42,32 +42,61 @@
 $requestBtn = $('#requestbtn');
 $cardDisplay = $('.card-display');
 let deckId =null;
-$('document').ready(
+$(function(){
+    
     axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
     .then(res=>{
         deckId =res.data.deck_id;
         $requestBtn.show()
-    })
-)
+    });
 
-$requestBtn.click(function(e){
-    e.preventDefault()
-    axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
-    .then(res =>{
-        // let cardValue=res.data.cards[0].value;
-        // let cardSuit =res.data.cards[0].suit;
-        let cardImgUrl = res.data.cards[0].image
-        console.log(cardImgUrl);
-        showCard(cardImgUrl);
+    $requestBtn.click(function(e){
+        e.preventDefault()
+        axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
+        .then(res =>{
+            // let cardValue=res.data.cards[0].value;
+            // let cardSuit =res.data.cards[0].suit;
+            let cardImgUrl = res.data.cards[0].image
+            let rotate = Math.random()*90 -45;
+            let positionX = Math.random()*40 -20;
+            let positionY = Math.random()*40 -20;
+            console.log(`cardUrl:${cardImgUrl}, rotate:${rotate}, X:${positionX}, Y:${positionY}`);
+            $cardDisplay.append(
+                $('<img>', {
+                    src: cardImgUrl,
+                    css:{
+                        transform: `translate(${positionX}px, ${positionY}px) rotate(${rotate}deg)`
+                    }
+                })
+            )
+        })
+        .catch(err=>{
+            $requestBtn.hide()
+            console.log(err)
+        })
+        // ====springboard answer=====
+        // .then(data => {
+        //   let cardSrc = data.cards[0].image;
+        //   let angle = Math.random() * 90 - 45;
+        //   let randomX = Math.random() * 40 - 20;
+        //   let randomY = Math.random() * 40 - 20;
+        //   $cardArea.append(
+        //     $('<img>', {
+        //       src: cardSrc,
+        //       css: {
+        //         transform: `translate(${randomX}px, ${randomY}px) rotate(${angle}deg)`
+        //       }
+        //     })
+        //   );
+        //   if (data.remaining === 0) $btn.remove();
+        // });
+        // Trasnlate: https://developer.mozilla.org/ja/docs/Web/CSS/transform-function/translate
     })
-    .catch(err=>{
-        $requestBtn.hide()
-        console.log(err)
-    })
-})
+
+
+});
 
 function showCard(imgUrl){
     let newImg=$('<img>').attr('src',imgUrl);
     $cardDisplay.append(newImg)
 }
-

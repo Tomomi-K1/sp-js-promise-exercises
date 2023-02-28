@@ -39,4 +39,19 @@ Promise.all(favoriteNumberFacts)
         }
     })
 
+// springboard answer
+// Promise.all(
+//     Array.from({ length: 4 }, () => {
+//         return $.getJSON(`${baseURL}/${favNumber}?json`);
+//     })
+//     ).then(facts => {
+//     facts.forEach(data => $("body").append(`<p>${data.text}</p>`));
+//     });
+
+// Array.from() にはオプションの引数 mapFn があります。これにより作成中の配列のすべての要素に対して map() 関数を実行することができます。
+
+// より明確に言うと、中間配列を生成しないことを除いて、Array.from(obj, mapFn, thisArg) は Array.from(obj).map(mapFn, thisArg) と同じ結果です。 mapFn は配列全体ではなく 2 つの引数 (element, index) のみを取るため、配列は構築途中になります。
+
+// Array.from({length:5})の説明
+// https://stackoverflow.com/questions/40528557/how-does-array-fromlength-5-v-i-i-work
 

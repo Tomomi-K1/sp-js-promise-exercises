@@ -1,0 +1,29 @@
+body{
+    text-align: center;
+    background-color: pink;
+}
+.card-display{
+    margin-top: 50px;
+    width: 100%;
+}
+
+form{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#requestbtn{
+    color: white;
+    background-color: grey;
+    padding: 7px;
+    border-radius: 5px;
+    border-color: grey;
+}
+
+img{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
